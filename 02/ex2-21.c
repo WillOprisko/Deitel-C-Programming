@@ -32,8 +32,8 @@ void square (int n)
    switch(n)
    {
       case 1 :
-         printf("%s\t", "*********");
-         break;
+         //printf("%s\t", "*********");
+         //break;
       case 9 :
          printf("%s\t", "*********");
          break;
