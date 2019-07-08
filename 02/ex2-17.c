@@ -1,9 +1,8 @@
-//
-//  ex2-17.c
-//  
-//
-//  Created by Admin on 7/4/19.
-//
+/*****************************
+ * Deitel - C Programming
+ * Chapter 2.17
+ * "Printing Values with printf"
+ ******************************/
 
 #include <stdio.h>
 

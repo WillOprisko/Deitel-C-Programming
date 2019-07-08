@@ -1,8 +1,7 @@
 /*****************************
 * Deitel - C Programming
 * Chapter 2.3
-* "Adding Two Integers"
-*
+* "Adding Two Integers"*
 ******************************/
 #include <stdio.h>
 

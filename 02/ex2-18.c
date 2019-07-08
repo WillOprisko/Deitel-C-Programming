@@ -1,9 +1,8 @@
-//
-//  ex2-18.c
-//  
-//
-//  Created by Admin on 7/4/19.
-//
+/*****************************
+ * Deitel - C Programming
+ * Chapter 2.18
+ * "Comparing Two Integers"*
+ ******************************/
 
 #include <stdio.h>
 
