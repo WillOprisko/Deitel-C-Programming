@@ -17,12 +17,13 @@ void O_print(int);
 int main(void)
 {
    
+   // Each ASCII Letter graphic is 6 chars tall
    for (int n = 1; n <= 6; n++)
    {
       G_print(n);
       W_print(n);
       O_print(n);
-      puts("");
+      puts("");      // create a new line
    }
    
    return 0;
