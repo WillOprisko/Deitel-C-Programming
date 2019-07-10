@@ -17,7 +17,7 @@ void printEvenLine(void);
 void printOddLine(void);
 
 // Not currently working //
-//void timeDelay(void);
+// void timeDelay(void); //
 
 int main(void)
 {
@@ -26,10 +26,10 @@ int main(void)
    // Clear the Screen //
    system("clear");
    
-   puts("Welcome to the ASCII Asterisk Checkerboard Maker!");
+   puts("Welcome to the ASCII and Unicode Checkerboard Maker!");
    puts("Please select an option:");
-   puts("1) Print Checker Board");
-   puts("2) Build Checker Board");
+   puts("1) Print ASCII Checker Board");
+   puts("2) Build Unicode Checker Board");
    puts("3) Exit Program");
    
    printf("%s", "\nEnter a number  ");
@@ -74,7 +74,11 @@ int buildCheckerBoard(void)
    system("clear");
    while (n <= 8)
    {
+      // The delay in printing each line is to simulate
+      // 'building' the checkerboard
       for (long i = 0; i < 200000000; i++) {;}
+      
+      // Control-Flow for which checkerboard row to print
       if ((n % 2) == 0)
       {
          printEvenLine();
@@ -103,12 +107,12 @@ void printEvenLine(void)
       if ((n % 2) != 0)
       {
          
-         // Dark Sqaure
+         // Unicode Grey Sqaure
          printf("\u2592");
       }
       else if((n % 2) == 0)
       {
-         // White Square
+         // Unicode White Square
          printf("\u2593");
       }
    }
@@ -123,12 +127,12 @@ void printOddLine(void)
    {
       if ((n % 2) != 0)
       {
-         // White Square
+         // Unicode White Square
          printf("\u2593");
       }
       else if((n % 2) == 0)
       {
-         // Dark Sqaure
+         // Unicode Grey Sqaure
          printf("\u2592");
       }
    }
