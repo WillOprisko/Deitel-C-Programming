@@ -6,9 +6,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 void printCheckerBoard(void);
-void buildCheckerBoard(int);
+int  buildCheckerBoard(void);
+
+void printEvenLine(void);
+void printOddLine(void);
+
+// Not currently working //
+void timeDelay(void);
 
 int main(void)
 {
@@ -43,7 +50,7 @@ int main(void)
    return 0;
 }
 
-void printCheckerBoard()
+void printCheckerBoard(void)
 {
    // Clear the Screen //
    system("clear");
@@ -57,9 +64,87 @@ void printCheckerBoard()
           " * * * * * * * *\n");
 }
 
-void buildCheckerBoard()
+int buildCheckerBoard(void)
 {
+   int n = 1;
+   
    // Clear the screen //
    system("clear");
+   while (n <= 8)
+   {
+      if ((n % 2) == 0)
+      {
+         printEvenLine();
+      }
+      else if ((n % 2) != 0)
+      {
+         printOddLine();
+      }
+      else
+      {
+         puts("Error with time() function");
+         puts("Program exiting...");
+         return 1;
+      }
+
+      n++;
+   }
    
+   return 0;
+}
+
+void printEvenLine(void)
+{
+   for (int n = 1; n <= 16; n++)
+   {
+      for (int i = 0; i < 10000000; i++) {;}
+      //timeDelay();
+      if ((n % 2) != 0)
+      {
+         printf("*");
+      }
+      else if((n % 2) == 0)
+      {
+         printf(" ");
+      }
+   }
+   
+   // Create a new line //
+   puts("");
+}
+
+void printOddLine(void)
+{
+   for (int n = 1; n <= 16; n++)
+   {
+      for (int i = 0; i < 10000000; i++) {;}
+      //timeDelay();
+      if ((n % 2) != 0)
+      {
+         printf(" ");
+      }
+      else if((n % 2) == 0)
+      {
+         printf("*");
+      }
+   }
+   
+   // Create a new line //
+   puts("");
+}
+
+// Function not working as intended //
+// Debugger and more research required //
+void timeDelay(void)
+{
+   time_t begin       = 0;
+   time_t end         = 0;
+   long int timeDifference = 0;
+
+   time(&begin);
+   while (timeDifference < 1 )
+   {
+      time(&end);
+      timeDifference = difftime(end, begin);
+   }
 }
