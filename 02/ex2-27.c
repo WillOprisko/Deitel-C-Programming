@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <wchar.h>
+#include <locale.h>
 
 void printCheckerBoard(void);
 int  buildCheckerBoard(void);
@@ -72,6 +74,7 @@ int buildCheckerBoard(void)
    system("clear");
    while (n <= 8)
    {
+      for (long i = 0; i < 200000000; i++) {;}
       if ((n % 2) == 0)
       {
          printEvenLine();
@@ -97,15 +100,16 @@ void printEvenLine(void)
 {
    for (int n = 1; n <= 16; n++)
    {
-      for (int i = 0; i < 10000000; i++) {;}
-      //timeDelay();
       if ((n % 2) != 0)
       {
-         printf("*");
+         
+         // Dark Sqaure
+         printf("\u2592");
       }
       else if((n % 2) == 0)
       {
-         printf(" ");
+         // White Square
+         printf("\u2593");
       }
    }
    
@@ -117,15 +121,15 @@ void printOddLine(void)
 {
    for (int n = 1; n <= 16; n++)
    {
-      for (int i = 0; i < 10000000; i++) {;}
-      //timeDelay();
       if ((n % 2) != 0)
       {
-         printf(" ");
+         // White Square
+         printf("\u2593");
       }
       else if((n % 2) == 0)
       {
-         printf("*");
+         // Dark Sqaure
+         printf("\u2592");
       }
    }
    
