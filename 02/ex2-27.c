@@ -15,7 +15,7 @@ void printEvenLine(void);
 void printOddLine(void);
 
 // Not currently working //
-void timeDelay(void);
+//void timeDelay(void);
 
 int main(void)
 {
@@ -135,7 +135,9 @@ void printOddLine(void)
 
 // Function not working as intended //
 // Debugger and more research required //
-void timeDelay(void)
+
+/*
+ void timeDelay(void)
 {
    time_t begin       = 0;
    time_t end         = 0;
@@ -148,3 +150,4 @@ void timeDelay(void)
       timeDifference = difftime(end, begin);
    }
 }
+*/
