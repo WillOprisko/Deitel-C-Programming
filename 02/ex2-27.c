@@ -6,9 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <wchar.h>
-#include <locale.h>
+
 
 void printCheckerBoard(void);
 int  buildCheckerBoard(void);
@@ -89,7 +87,7 @@ int buildCheckerBoard(void)
       }
       else
       {
-         puts("Error with time() function");
+         puts("Error with buildCheckerBoard() function");
          puts("Program exiting...");
          return 1;
       }
@@ -106,7 +104,6 @@ void printEvenLine(void)
    {
       if ((n % 2) != 0)
       {
-         
          // Unicode Grey Sqaure
          printf("\u2592");
       }
