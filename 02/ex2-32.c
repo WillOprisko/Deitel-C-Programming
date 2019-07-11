@@ -44,7 +44,7 @@ int main(void)
    
    // Control Flow for User Input //
    // Exit program if the user enters '3' or an invalid value
-   if (choice != 1 || choice != 2)
+   if (choice < 1 || choice > 2)
    {
       puts("It appears you would like to exit the program.");
       puts("Have a nice day!");
@@ -88,8 +88,19 @@ float calculateBMI(int n)
 
 float customaryBMI(void)
 {
+   float weight = 0;
+   float height = 0;
+   float result = 0;
    
+   printf("%s", "Please provide your current weight in lbs:  ");
+   scanf("%f", &weight);
    
+   printf("%s", "Next enter your height in inches:  ");
+   scanf("%f", &height);
+   
+   result = (weight * 703) / (height * height);
+   
+   return result;
 }
 
 
