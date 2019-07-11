@@ -21,12 +21,17 @@
  V.   displayBMI()
 */
 
+float calculateBMI    (int);
+float customaryBMI   (void);
+float metricBMI      (void);
+
 
 int main(void)
 {
    int  choice = 0;
    float index = 0;
    
+   // Begin Program //
    puts("Welcome to the Body Mass Index Calculator!");
    puts("Please make a selection.");
    puts("1) U.S. customary Units");
@@ -48,14 +53,44 @@ int main(void)
    //
    else if (choice == 1 || choice == 2)
    {
-      
+      index = calculateBMI(choice);
+   }
+   // Exit with error for all other corner cases
+   else
+   {
+      puts("User input error. Exiting program.");
+      return 1;
    }
    
    
    return 0;
 }
 
+float calculateBMI(int n)
+{
+   float indexValue = 0;
+   
+   if (n == 1)
+   {
+      indexValue = customaryBMI();
+   }
+   else if (n == 2)
+   {
+      //indexValue = metricBMI();
+   }
+   else
+   {
+      puts("Fatal error in calculateBMI().");
+   }
+   
+   return indexValue;
+}
 
+float customaryBMI(void)
+{
+   
+   
+}
 
 
 
