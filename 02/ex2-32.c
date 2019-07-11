@@ -25,11 +25,16 @@ float calculateBMI    (int);
 float customaryBMI   (void);
 float metricBMI      (void);
 
+void  displayBMI     (float);
+
 
 int main(void)
 {
    int  choice = 0;
    float index = 0;
+   
+   // Clear Screen //
+   system("clear");
    
    // Begin Program //
    puts("Welcome to the Body Mass Index Calculator!");
@@ -38,53 +43,50 @@ int main(void)
    puts("2) International Metric Units");
    puts("3) Exit program");
    
-   printf("%s", ">>  ");
-   scanf("%d", &choice);
+   printf("%s", "-> ");
+   scanf ("%d", &choice);
    
+   // Clear Screen //
+   system("clear");
    
    // Control Flow for User Input //
-   // Exit program if the user enters '3' or an invalid value
-   if (choice < 1 || choice > 2)
+   switch(choice)
    {
-      puts("It appears you would like to exit the program.");
-      puts("Have a nice day!");
-      return 0;
-   }
-   //
-   else if (choice == 1 || choice == 2)
-   {
-      index = calculateBMI(choice);
-   }
-   // Exit with error for all other corner cases
-   else
-   {
-      puts("User input error. Exiting program.");
-      return 1;
+      case 1 :
+      case 2 :
+         index = calculateBMI(choice);
+         break;
+      // Exit program if the user enters '3' or an invalid value
+      default :
+         puts("It appears you would like to exit the program.");
+         puts("Have a nice day!\n");
+         return 0;
    }
    
-   
+   displayBMI(index);
    return 0;
 }
+
 
 float calculateBMI(int n)
 {
    float indexValue = 0;
    
-   if (n == 1)
+   switch(n)
    {
-      indexValue = customaryBMI();
-   }
-   else if (n == 2)
-   {
-      //indexValue = metricBMI();
-   }
-   else
-   {
-      puts("Fatal error in calculateBMI().");
+      case 1 :
+         indexValue = customaryBMI();
+         break;
+      case 2 :
+         indexValue = metricBMI();
+         break;
+      default :
+         puts("Fatal error in calculateBMI().");
    }
    
    return indexValue;
 }
+
 
 float customaryBMI(void)
 {
@@ -101,6 +103,51 @@ float customaryBMI(void)
    result = (weight * 703) / (height * height);
    
    return result;
+}
+
+
+float metricBMI(void)
+{
+   float weight = 0;
+   float height = 0;
+   float result = 0;
+   
+   printf("%s", "Please provide your current weight in kgs:  ");
+   scanf("%f", &weight);
+   
+   printf("%s", "Next enter your height in meters:  ");
+   scanf("%f", &height);
+   
+   result = weight / (height * height);
+   
+   return result;
+}
+
+void displayBMI(float n)
+{
+   // One Space of Padding //
+   puts("");
+   puts("BMI CHART");
+   if (n < 18.5)
+      printf("\033[46m Underweight:  less than 18.5 \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   else
+      puts("Underweight:  less than 18.5");
+   
+   if (n >= 18.5 && n <= 24.9)
+      printf("\033[42m Normal:       between 18.5 and 24.9 \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   else
+      puts("Normal:       between 18.5 and 24.9");
+   
+   if (n >= 25.0 && n <= 29.9)
+      printf("\033[43m Overweight:   between 25 and 29.9 \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   else
+      puts("Overweight:   between 25 and 29.9");
+   
+   if (n >= 30.0)
+      printf("\033[41m Obese:        30 or greater \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   else
+      puts("Obese:        30 or greater");
+   
 }
 
 
