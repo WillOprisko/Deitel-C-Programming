@@ -128,25 +128,71 @@ void displayBMI(float n)
    // One Space of Padding //
    puts("");
    puts("BMI CHART");
+   
+   
    if (n < 18.5)
-      printf("\033[46m Underweight:  less than 18.5 \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   {
+      // Change Text Background Color //
+      printf("\033[46m");
+      printf("Underweight:  less than 18.5 ");
+      
+       // Reset Background //
+      printf("\033[0m");
+      printf("\t\t<- Your current BMI is %.1f\n", n);
+   }
    else
+   {
       puts("Underweight:  less than 18.5");
+   }
+   
    
    if (n >= 18.5 && n <= 24.9)
-      printf("\033[42m Normal:       between 18.5 and 24.9 \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   {
+      
+      // Change Text Background Color //
+      printf("\033[42m");
+      printf("Normal:       between 18.5 and 24.9 ");
+   
+      // Reset Background //
+      printf("\033[0m");
+      printf("\t\t<- Your current BMI is %.1f\n", n);
+   }
    else
+   {
       puts("Normal:       between 18.5 and 24.9");
+   }
+   
    
    if (n >= 25.0 && n <= 29.9)
-      printf("\033[43m Overweight:   between 25 and 29.9 \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   {
+      // Change Text Background Color //
+      printf("\033[43m");
+      printf("Overweight:   between 25 and 29.9 ");
+      
+      // Reset Background //
+      printf("\033[0m");
+      printf("\t\t<- Your current BMI is %.1f\n", n);
+   }
    else
+   {
       puts("Overweight:   between 25 and 29.9");
+   }
+   
    
    if (n >= 30.0)
-      printf("\033[41m Obese:        30 or greater \033[0m\t\t<- Your current BMI is %.1f\n", n);
+   {      
+      // Change Text Background Color //
+      printf("\033[41m");
+      printf("Obese:        30 or greater ");
+      
+      // Reset Background //
+      printf("\033[0m");
+      printf("\t\t<- Your current BMI is %.1f\n", n);
+   }
    else
+   {
       puts("Obese:        30 or greater");
+   }
    
 }
 
