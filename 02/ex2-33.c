@@ -3,34 +3,11 @@
  * Chapter 2.33
  * "Car-Pool Savings Calculator"
  ******************************/
-/*
- I.   main()
-      A. Control-Flow of Choices
-      B. Store values to share between choices
-      C. Provide User with Choices
-         1. Allow the user to move from choice 1 through 4
-II.   menu()
-II.   commuteCost()
-      A. Miles to Work
-      B. Cost of gasoline per gallon
-      C. Average mpg
-      D. Daily Parking fee
-      E. Total Tolls per day
-III.  carPoolSavings()
-      A. Number of Colleagues
-      B. Distance for each Colleague
-IV.   compareTravelTime()
-      A. Current Commute Time
-      B. Estimated Car-Pool Time
-      C. Travel Time
-      D. Personal Cost (Time * Current Hourly Rate)
- V.   exit()
-      A. exit program 
- */
-
 
 #include <stdio.h>
 #include <stdlib.h>
+
+
 
 //  Each structure data type is to allow the program to collect individual data
 //  points related to Commuting, Car-Pooling, and Comparing the Cost and Time
@@ -52,6 +29,7 @@ struct commute
    unsigned short int milesPerGallon;
    float parkingFees;
    float tolls;
+   float totalCost;
 };
 
 
@@ -62,6 +40,7 @@ struct carpool
    struct commute Commute;
    unsigned short int passengers;
    float distance;
+   float totalCost;
 };
 
 
@@ -76,7 +55,28 @@ struct travel
 // Each function is associated with a specific 'struct' data type //
 struct commute commuteCost(struct commute);
 struct carpool carPoolCost(struct commute, struct carpool);
-struct travel  totalTravelCost(struct commute, struct carpool);
+struct travel  compareTravelCosts(struct commute, struct carpool, struct travel);
+
+void displayResults(struct commute, struct carPool, struct travel, int);
+
+//  Moved the menu to a separate function in order to allow the user to
+//  make another selection without reseting the values in each 'struct'
+int menu(void)
+{
+   int selection = 0;
+   
+   puts("Please select an option:");
+   puts("");
+   puts("1) Determine Current Commute Cost");
+   puts("2) Project Potential Car-Pool Savings");
+   puts("3) Compare Commute Time to Car-Pool Time");
+   puts("4) Exit Program");
+   
+   printf("%s", ">  ");
+   scanf("%d", &selection);
+   
+   return selection;
+}
 
 
 // Begin Main Program //
@@ -96,43 +96,43 @@ int main(void)
    
    // Prompt User for Input //
    puts("Welcome to the Car-Pool Savings Calculator.");
-   while (choice < 4)
+   do
    {
+      choice = menu();
       switch(choice)
       {
          case 1 :
+            printf("%d\n", choice);
             Commute = commuteCost(Commute);
             break;
          case 2 :
+            printf("%d\n", choice);
             CarPool = carPoolCost(Commute, CarPool);
             break;
          case 3 :
-            Travel  = totalTravelCost(Commute, CarPool);
+            printf("%d\n", choice);
+            Travel  = compareTravelCosts(Commute, CarPool, Travel);
             break;
+         case 4 :
          default :
+            puts("");
             puts("It appears you would like to exit the program.");
             choice = 4;
       }
-   }
-   
-   /*
-   Commute = commuteCost(Commute);
-   printf("%f\n%f\n%hu\n%f\n%f\n",Commute.distance, Commute.fuelCost, Commute.milesPerGallon, Commute.parkingFees, Commute.tolls);
-    */
-   
-   CarPool = carPoolCost(Commute, CarPool);
-   printf("%.1f\n", CarPool.Commute.distance);
-   printf("%.2f\n", CarPool.Commute.fuelCost);
-   printf("%hu\n", CarPool.Commute.milesPerGallon);
-   printf("%.2f\n", CarPool.Commute.parkingFees);
-   printf("%.2f\n", CarPool.Commute.tolls);
-   printf("%d\n", CarPool.passengers);
-   printf("%.1f\n", CarPool.distance);
+      
+      
+      if (choice >= 1 && choice <= 3)
+      {
+         displayResults(Commute, CarPool, Travel, choice);
+      }
+      
+   } while (choice < 4);
    
    return 0;
 }
 
 
+//  //
 struct commute commuteCost(struct commute Commute)
 {
    for (int n = 1; n <= 5; n++)
@@ -175,6 +175,7 @@ struct commute commuteCost(struct commute Commute)
 }
 
 
+//  //
 struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
 {
    float travelDistance = 0;
@@ -196,13 +197,14 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
    
    for (int n = 1; n <= CarPool.passengers; n++)
    {
+      // Clear Screen //
       system("clear");
       
       if (n > 1 && n < CarPool.passengers)
       {
          puts("What is door-to-door distance to pick-up the next passenger?");
       }
-      else if (n == CarPool.passengers)
+      else if (n != 1 && n == CarPool.passengers)
       {
          puts("What is the door-to-door distance to pick-up the last passenger?");
       }
@@ -213,13 +215,11 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
       else
       {
          puts("How far will you drive to pick-up the first passenger?");
-         
       }
       
-      printf("Distance in miles:  ");
+      printf("Miles:  ");
       scanf("%f", &travelDistance);
       CarPool.distance += (travelDistance * 2);
-      
    }
    
    // Clear Screen //
@@ -228,28 +228,42 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
    // Accouts for the fact that the last passenger may not live closer to work
    // than the individual who is commuting alone
    puts("What is the roundtrip distance from the your last carpool stop to work?");
+   printf("Miles:  ");
    scanf("%f", &travelDistance);
    CarPool.distance += travelDistance;
-   
    
    return CarPool;
 }
 
 
-struct travel  totalTravelCost(struct commute Commute, struct carpool CarPool)
+//  //
+struct travel  compareTravelCosts(struct commute Commute,
+                                  struct carpool CarPool,
+                                  struct travel Travel)
 {
-   struct travel Travel;
+
    return Travel;
 }
 
-/* menu()
- puts("Please select an option:");
- puts("");
- puts("1) Determine Current Commute Cost");
- puts("2) Project Potential Car-Pool Savings");
- puts("3) Compare Commute Time to Car-Pool Time");
- puts("4) Exit Program");
- 
- printf("%s", ">  ");
- scanf("%d", &choice);
+void displayResults(Commute, CarPool, Travel, int n)
+{
+   
+   
+}
+
+
+/*
+ Commute = commuteCost(Commute);
+ printf("%f\n%f\n%hu\n%f\n%f\n",Commute.distance, Commute.fuelCost, Commute.milesPerGallon, Commute.parkingFees, Commute.tolls);
+ */
+
+/*
+ //CarPool = carPoolCost(Commute, CarPool);
+ printf("%.1f\n", CarPool.Commute.distance);
+ printf("%.2f\n", CarPool.Commute.fuelCost);
+ printf("%hu\n", CarPool.Commute.milesPerGallon);
+ printf("%.2f\n", CarPool.Commute.parkingFees);
+ printf("%.2f\n", CarPool.Commute.tolls);
+ printf("%d\n", CarPool.passengers);
+ printf("%.1f\n", CarPool.distance);
  */
