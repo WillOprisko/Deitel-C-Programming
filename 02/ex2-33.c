@@ -231,6 +231,8 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
       scanf("%f", &travelDistance);
       CarPool.distance += (travelDistance * 2);
    }
+   //  Account for the Driver  //
+   CarPool.passengers += 1;
    
    // Clear Screen //
    system("clear");
@@ -303,7 +305,7 @@ void displayResults(struct commute Commute,
    {
       case 1 :
          system("clear");
-         printf("\nCommute  Cost: $%.2f\n", Commute.totalCost);
+         printf("Commute  Cost: $%.2f\n", Commute.totalCost);
          break;
       case 2 :
          system("clear");
