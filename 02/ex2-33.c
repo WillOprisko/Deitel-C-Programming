@@ -14,7 +14,7 @@
 //  between commuting and car-pooling.
 
 //  I am using 'structs' in order to avoid incorporating pointers or
-//  constructing arrays to hold compiled information that would require
+//  constructing arrays to hold associated information that would require
 //  source-code knowledge to access the correct element(s).
 
 //  These attempts are designed to keep primary program control within main()
@@ -30,6 +30,7 @@ struct commute
    float parkingFees;
    float tolls;
    float totalCost;
+   float travelTime;
 };
 
 
@@ -41,10 +42,11 @@ struct carpool
    unsigned short int passengers;
    float distance;
    float totalCost;
+   float travelTime;
 };
 
 
-//  Compares information collected in Commute and CarPool
+//    //
 struct travel
 {
    struct commute Commute;
@@ -55,9 +57,12 @@ struct travel
 // Each function is associated with a specific 'struct' data type //
 struct commute commuteCost(struct commute);
 struct carpool carPoolCost(struct commute, struct carpool);
-struct travel  compareTravelCosts(struct commute, struct carpool, struct travel);
+struct travel  compareTravel(struct commute, struct carpool, struct travel);
 
-void displayResults(struct commute, struct carPool, struct travel, int);
+
+//  Compares information collected in 'commute' and 'carPool'
+void displayResults(struct commute, struct carpool, struct travel, int);
+
 
 //  Moved the menu to a separate function in order to allow the user to
 //  make another selection without reseting the values in each 'struct'
@@ -108,10 +113,13 @@ int main(void)
          case 2 :
             printf("%d\n", choice);
             CarPool = carPoolCost(Commute, CarPool);
+            Commute = CarPool.Commute;
             break;
          case 3 :
             printf("%d\n", choice);
-            Travel  = compareTravelCosts(Commute, CarPool, Travel);
+            Travel  = compareTravel(Commute, CarPool, Travel);
+            Commute = Travel.Commute;
+            CarPool = Travel.CarPool;
             break;
          case 4 :
          default :
@@ -120,12 +128,7 @@ int main(void)
             choice = 4;
       }
       
-      
-      if (choice >= 1 && choice <= 3)
-      {
-         displayResults(Commute, CarPool, Travel, choice);
-      }
-      
+      displayResults(Commute, CarPool, Travel, choice);
    } while (choice < 4);
    
    return 0;
@@ -171,6 +174,12 @@ struct commute commuteCost(struct commute Commute)
       }
    }
    
+   Commute.totalCost = ((Commute.distance / Commute.milesPerGallon)
+                       * Commute.fuelCost
+                       + Commute.parkingFees
+                       + Commute.tolls);
+   
+   printf("\nCommute  Cost: %.2f\n", Commute.totalCost);
    return Commute;
 }
 
@@ -232,22 +241,57 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
    scanf("%f", &travelDistance);
    CarPool.distance += travelDistance;
    
+   CarPool.totalCost = ((CarPool.distance / CarPool.Commute.milesPerGallon)
+                        * CarPool.Commute.fuelCost
+                        + CarPool.Commute.parkingFees
+                        + CarPool.Commute.tolls);
+   printf("\nCommute  Cost: %.2f\n", CarPool.Commute.totalCost);
+   printf("Car-Pool Cost: %.2f\n", CarPool.totalCost);
    return CarPool;
 }
 
 
-//  //
-struct travel  compareTravelCosts(struct commute Commute,
-                                  struct carpool CarPool,
-                                  struct travel Travel)
+//    //
+struct travel compareTravel(struct commute Commute,
+                            struct carpool CarPool,
+                            struct travel Travel)
 {
+   if (Commute.distance <= 0 && CarPool.distance <= 0)
+   {
+      Travel.CarPool  = carPoolCost(Commute, CarPool);
+      Travel.Commute  = Travel.CarPool.Commute;
+   }
+   else if (Commute.distance > 0 && CarPool.distance <= 0)
+   {
+      Travel.Commute = Commute;
+      //CarPool.Commute = Commute;
+      Travel.CarPool = carPoolCost(Commute, CarPool);
+   }
+   else
+   {
+      Travel.Commute = Commute;
+      Travel.CarPool = CarPool;
+   }
 
    return Travel;
 }
 
-void displayResults(Commute, CarPool, Travel, int n)
+
+//    //
+void displayResults(struct commute Commute,
+                    struct carpool CarPool,
+                    struct travel  Travel, int n)
 {
-   
+   switch(n)
+   {
+      case 1 :
+         printf("");
+         printf("");
+      case 2 :
+      case 3 :
+      default :
+         ;
+   }
    
 }
 
