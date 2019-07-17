@@ -31,7 +31,7 @@ struct commute
    float parkingFees;
    float tolls;
    float totalCost;
-   float travelTime;
+   int travelTime;
 };
 
 
@@ -43,7 +43,7 @@ struct carpool
    unsigned short int passengers;
    float distance;
    float totalCost;
-   float travelTime;
+   int travelTime;
 };
 
 
@@ -52,6 +52,7 @@ struct travel
 {
    struct commute Commute;
    struct carpool CarPool;
+   int averageSpeed;
 };
 
 
@@ -241,10 +242,11 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
    scanf("%f", &travelDistance);
    CarPool.distance += travelDistance;
    
-   CarPool.totalCost = ((CarPool.distance / CarPool.Commute.milesPerGallon)
+   CarPool.totalCost = (((CarPool.distance / CarPool.Commute.milesPerGallon)
                         * CarPool.Commute.fuelCost
                         + CarPool.Commute.parkingFees
-                        + CarPool.Commute.tolls);
+                        + CarPool.Commute.tolls)
+                        / CarPool.passengers);
    
    return CarPool;
 }
@@ -263,7 +265,6 @@ struct travel compareTravel(struct commute Commute,
    else if (Commute.distance > 0 && CarPool.distance <= 0)
    {
       Travel.Commute = Commute;
-      //CarPool.Commute = Commute;
       Travel.CarPool = carPoolCost(Commute, CarPool);
    }
    else
@@ -271,6 +272,9 @@ struct travel compareTravel(struct commute Commute,
       Travel.Commute = Commute;
       Travel.CarPool = CarPool;
    }
+   
+   Travel.Commute.travelTime = (Travel.Commute.distance / 35) * 60;
+   Travel.CarPool.travelTime = (Travel.CarPool.distance / 35) * 60;
 
    return Travel;
 }
@@ -286,21 +290,31 @@ void displayResults(struct commute Commute,
    switch(n)
    {
       case 1 :
+         system("clear");
          printf("\nCommute  Cost: $%.2f\n", Commute.totalCost);
          break;
       case 2 :
-         puts("");
+         system("clear");
          printf("Commute Cost: $%.2f\t", CarPool.Commute.totalCost);
          printf("Car-Pool Cost: $%.2f\n", CarPool.totalCost);
          break;
       case 3 :
+         system("clear");
          printf("Commute Cost: $%.2f\t", Travel.Commute.totalCost);
          printf("Car-Pool Cost: $%.2f\n", Travel.CarPool.totalCost);
-         printf("Commute Time: $%.2f\t", Commute.totalCost);
-         printf("Car-Pool Time: $%.2f\n", CarPool.totalCost);
+         printf("Commute Time: %d mins\t", Travel.Commute.travelTime);
+         printf("Car-Pool Time: %d mins\n", Travel.CarPool.travelTime);
          break;
       case 4 :
       default :
          ;
+   }
+   
+   
+   if (n >= 1 && n <= 3)
+   {
+      printf("Press [ENTER] to contine . . .  ");
+      scanf("%c%*c",&ch);
+      system("clear");
    }
 }
