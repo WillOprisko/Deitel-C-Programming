@@ -273,8 +273,20 @@ struct travel compareTravel(struct commute Commute,
       Travel.CarPool = CarPool;
    }
    
-   Travel.Commute.travelTime = (Travel.Commute.distance / 35) * 60;
-   Travel.CarPool.travelTime = (Travel.CarPool.distance / 35) * 60;
+   //  Clear Screen  //
+   system("clear");
+   
+   puts("On a typical day, how fast do you typically drive?");
+   printf("%s", "Car MPH:  ");
+   scanf("%d", &Travel.averageSpeed);
+   
+   Travel.Commute.travelTime = ( Travel.Commute.distance
+                               / Travel.averageSpeed)
+                               * 60;
+   
+   Travel.CarPool.travelTime = ( Travel.CarPool.distance
+                               / Travel.averageSpeed)
+                               * 60;
 
    return Travel;
 }
