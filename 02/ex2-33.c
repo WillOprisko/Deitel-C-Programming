@@ -146,7 +146,7 @@ struct commute commuteCost(struct commute Commute)
       switch(n)
       {
          case 1 :
-            puts("How far do you drive to and from work each day?");
+            puts("How far do you drive to work each day?");
             printf("%s", "Miles:  ");
             scanf("%f", &Commute.distance);
             break;
@@ -176,6 +176,8 @@ struct commute commuteCost(struct commute Commute)
       }
    }
    
+   //  Double the distance to represent a round trip to and from work  //
+   Commute.distance *= 2;
    Commute.totalCost = ((Commute.distance / Commute.milesPerGallon)
                        * Commute.fuelCost
                        + Commute.parkingFees
@@ -239,10 +241,10 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
    
    // Accouts for the fact that the last passenger may not live closer to work
    // than the individual who is commuting alone
-   puts("What is the roundtrip distance from the your last carpool stop to work?");
+   puts("What is the distance from the your last carpool stop to work?");
    printf("Miles:  ");
    scanf("%f", &travelDistance);
-   CarPool.distance += travelDistance;
+   CarPool.distance += travelDistance * 2;
    
    CarPool.totalCost = (((CarPool.distance / CarPool.Commute.milesPerGallon)
                         * CarPool.Commute.fuelCost
@@ -305,7 +307,7 @@ void displayResults(struct commute Commute,
    {
       case 1 :
          system("clear");
-         printf("Commute  Cost: $%.2f\n", Commute.totalCost);
+         printf("Commute Cost: $%.2f\n", Commute.totalCost);
          break;
       case 2 :
          system("clear");
