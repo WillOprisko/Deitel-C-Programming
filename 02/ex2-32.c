@@ -180,7 +180,7 @@ void displayBMI(float n)
    
    
    if (n >= 30.0)
-   {      
+   {
       // Change Text Background Color //
       printf("\033[41m");
       printf("Obese:        30 or greater ");
