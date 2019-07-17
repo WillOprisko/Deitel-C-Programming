@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 
 
@@ -179,7 +180,6 @@ struct commute commuteCost(struct commute Commute)
                        + Commute.parkingFees
                        + Commute.tolls);
    
-   printf("\nCommute  Cost: %.2f\n", Commute.totalCost);
    return Commute;
 }
 
@@ -245,8 +245,7 @@ struct carpool carPoolCost(struct commute Commute, struct carpool CarPool)
                         * CarPool.Commute.fuelCost
                         + CarPool.Commute.parkingFees
                         + CarPool.Commute.tolls);
-   printf("\nCommute  Cost: %.2f\n", CarPool.Commute.totalCost);
-   printf("Car-Pool Cost: %.2f\n", CarPool.totalCost);
+   
    return CarPool;
 }
 
@@ -282,32 +281,26 @@ void displayResults(struct commute Commute,
                     struct carpool CarPool,
                     struct travel  Travel, int n)
 {
+   char ch;
+   
    switch(n)
    {
       case 1 :
-         printf("");
-         printf("");
+         printf("\nCommute  Cost: $%.2f\n", Commute.totalCost);
+         break;
       case 2 :
+         puts("");
+         printf("Commute Cost: $%.2f\t", CarPool.Commute.totalCost);
+         printf("Car-Pool Cost: $%.2f\n", CarPool.totalCost);
+         break;
       case 3 :
+         printf("Commute Cost: $%.2f\t", Travel.Commute.totalCost);
+         printf("Car-Pool Cost: $%.2f\n", Travel.CarPool.totalCost);
+         printf("Commute Time: $%.2f\t", Commute.totalCost);
+         printf("Car-Pool Time: $%.2f\n", CarPool.totalCost);
+         break;
+      case 4 :
       default :
          ;
    }
-   
 }
-
-
-/*
- Commute = commuteCost(Commute);
- printf("%f\n%f\n%hu\n%f\n%f\n",Commute.distance, Commute.fuelCost, Commute.milesPerGallon, Commute.parkingFees, Commute.tolls);
- */
-
-/*
- //CarPool = carPoolCost(Commute, CarPool);
- printf("%.1f\n", CarPool.Commute.distance);
- printf("%.2f\n", CarPool.Commute.fuelCost);
- printf("%hu\n", CarPool.Commute.milesPerGallon);
- printf("%.2f\n", CarPool.Commute.parkingFees);
- printf("%.2f\n", CarPool.Commute.tolls);
- printf("%d\n", CarPool.passengers);
- printf("%.1f\n", CarPool.distance);
- */
