@@ -44,18 +44,21 @@ int main(void)
    
    //  Processing Phase  //
    //  obtain the first grade from user
-   printf("%s", "Enter grade, -1 to end: ");    //  prompt user for input
-   scanf("%d", &grade);                         //  read grade from user
+   //  printf("%s", "Enter grade, -1 to end: ");    //  prompt user for input
+   //  scanf("%d", &grade);                         //  read grade from user
    
    //  loop while sentinel value is not entered by the user
    while (grade != -1)
    {
-      total = total + grade;     //  add grade to total
-      counter = counter + 1;     //  increment counter
-      
       //  get next grade from user
       printf("%s", "Enter grade, -1 to end: ");    //  prompt user for input
       scanf("%d", &grade);                         //  read next grade
+      
+      if (grade >= 0)
+      {
+         total   += grade;    //  add grade to total
+         counter += 1;        //  increment counter
+      }
    }
    //  end while-loop
    
@@ -65,8 +68,8 @@ int main(void)
    if (counter != 0)
    {
       //  calculate average of all grades entered
-      average = (float) total / counter;        //  cast int to float to avoid
-                                                //  truncation
+      average = (float) total / counter;     //  cast int to float to avoid
+                                             //  truncation
       
       //  display average with two digits of precision
       printf("Class average is %.2f\n", average);
@@ -76,6 +79,6 @@ int main(void)
       //  if no grades were entered, output message
       puts("No grades were entered");
    }
-      
+   
    return 0;
 }
