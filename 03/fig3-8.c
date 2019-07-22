@@ -38,7 +38,44 @@ int main(void)
    float average;             //  number with a decimal point for average
    
    //  Initialization Phase  //
+   total   = 0;     //  initialize total to zero
+   counter = 0;     //  initialize loop counter to zero
    
    
+   //  Processing Phase  //
+   //  obtain the first grade from user
+   printf("%s", "Enter grade, -1 to end: ");    //  prompt user for input
+   scanf("%d", &grade);                         //  read grade from user
+   
+   //  loop while sentinel value is not entered by the user
+   while (grade != -1)
+   {
+      total = total + grade;     //  add grade to total
+      counter = counter + 1;     //  increment counter
+      
+      //  get next grade from user
+      printf("%s", "Enter grade, -1 to end: ");    //  prompt user for input
+      scanf("%d", &grade);                         //  read next grade
+   }
+   //  end while-loop
+   
+   
+   //  Termination Phase  //
+   //  if user entered at least one grade
+   if (counter != 0)
+   {
+      //  calculate average of all grades entered
+      average = (float) total / counter;        //  cast int to float to avoid
+                                                //  truncation
+      
+      //  display average with two digits of precision
+      printf("Class average is %.2f\n", average);
+   }
+   else
+   {
+      //  if no grades were entered, output message
+      puts("No grades were entered");
+   }
+      
    return 0;
 }
