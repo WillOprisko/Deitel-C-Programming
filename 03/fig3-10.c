@@ -1,6 +1,6 @@
 /*************************************************
  * Deitel - C Programming
- * Chapter 3.9 -- Figure 3.8
+ * Chapter 3.10 -- Figure 3.10
  * "Class Average -- Sentinel-Controlled Repetition"
  *************************************************/
 
@@ -34,18 +34,77 @@
  
                ::Pseudocode Structure::
  
- Initialize total to zero
- Initialize counter to zero
+ // First Refinement //
+ Initialize variables
+ Input the ten quiz grades and count passes and failures
+ Print a summary of the exam results and decide whether instructor should
+   receive a bonus
  
- Input the first grade
- While the user has not entered the sentinel
- Add this grade into the running total
- Add one to the grade counter
- Input the next grade (possibly the sentinel)
+ // Second Refinement //
+ Initialize passes to zero
+ Initialize failures to zero
+ Initialize student to one
  
- If the counter is not equal to zero
- Set the average to the total divided by the counter
- Print the average
- else
- Print "No grades were entered"
+ While student counter is less than or equal to ten
+      Input the next exam result
+ 
+      If the student passed
+            Add one to passes
+      else
+            Add one to failures
+ 
+      Add one to student counter
+ 
+ Print the number of passes
+ Print the number of failures
+ If more than eight students passed
+      Print "Bonus to instructor!"
  */
+
+#include <stdio.h>
+
+//  Begin program execution  //
+int main(void)
+{
+   //  Initialization Phase  //
+   unsigned int passes   = 0;          //  number of passes
+   unsigned int failures = 0;          //  number of failures
+   unsigned int student  = 1;          //  student counter
+   int result;       // one exam result
+   
+   
+   //  Processing Phase  //
+   while (student <= 10)
+   {
+      //  Prompt user for input and obtain value from user
+      printf("%s", "Enter result ( 1=pass, 2=fail ): ");
+      scanf("%d", &result);
+      
+      //  Increment passes, if result equals 1
+      if (result == 1)
+      {
+         passes += 1;
+      }
+      //  Otherwise, increment failures
+      else
+      {
+         failures += 1;
+      }
+      
+      //  Increment student counter
+      student += 1;
+   }
+   
+   //  Termination Phase  //
+   //  Display number of passes and failures
+   printf("Passed %u\n", passes);
+   printf("Failed %u\n", failures);
+   
+   //  If more than eight students passed, print "Bonus to instructor!"
+   if (passes > 8)
+   {
+      puts("Bonus to instructor!");
+   }   
+   
+   return 0;
+}
