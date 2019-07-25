@@ -11,28 +11,50 @@
    2. Calculate and print the average MPG for all tankfuls.
  
    // Intialization Phase //
+   Initialize miles to one
+   Initialize totalMiles to zero
+ 
    Initialize gallons to zero
    Initialize totalGallons to zero
  
-   Initialize miles to zero
-   Initialize totalMiles to zero
+   Initialize trip to zero
  
  
    // Processing Phase //
-   While gallons is greater than 0
-         Input gallons
-         Add gallons to totalGallons
+   Clear Screen
+   Print program message
+ 
+   While miles is greater than 0
+         If trip greater than one
+            Print message about next trip
+         Else-if trip is less than or equal to one
+            Print message about first trip
  
          Input miles
          Add miles to totalMiles
+         If miles is less than or equal to zero
+            Print exit message
+            Break while-loop
  
-         Print miles divided by gallons
+         Input gallons
+         Add gallons to totalGallons
+         If miles is greater than 0 and gallons is less than or equal to zero
+            Print exit message
+            Break while-loop
  
-         Clear Screen
+         Add miles to totalMiles
+         Add gallons to totalGallons
+         Increment trip by one
+ 
+         if miles is greater than 0 and gallons is greater than 0
+            Print miles divided by gallons
  
  
    // Termination Phase //
-   Print totalMiles divided by totalGallons
+   If totalMiles and totalGallons are both greater than 0
+      Print totalMiles divided by totalGallons
+ 
+   Exit Program
  */
 
 #include <stdio.h>
@@ -40,13 +62,13 @@
 
 int main(void)
 {
-   float miles         = 1;
-   float totalMiles    = 0;
+   float miles         = 1;      //  miles driven during the trip
+   float totalMiles    = 0;      //  total miles driven
    
-   float gallons       = 0;
-   float totalGallons  = 0;
+   float gallons       = 0;      //  gallons of gas used for the trip
+   float totalGallons  = 0;      //  total gallons of gas used
    
-   int trip = 1;
+   int trip = 1;                 //  trip number being entered
    
    
    //  Clear Screen  //
@@ -56,6 +78,7 @@ int main(void)
    puts("Welcome to the MPG Calculator!");
    while (miles > 0)
    {
+      //  Indicates the program is aware of how many trips the user enters
       if (trip > 1)
       {
          printf("Tell us about your next trip:\n");
@@ -66,8 +89,10 @@ int main(void)
          puts("");
       }
       
+      //  Prompt User  //
       printf("%s", "How many miles did you drive?  ");
       scanf("%f", &miles);
+      //  Exit While-Loop //
       if (miles <= 0)
       {
          //puts("");
@@ -75,8 +100,10 @@ int main(void)
          break;
       }
       
+      //  Prompt User  //
       printf("%s", "How many gallons of gas were used?  ");
       scanf("%f", &gallons);
+      //  Exit While-Loop  //
       if (gallons <= 0 && miles >= 0)
       {
          puts("");
@@ -85,14 +112,12 @@ int main(void)
          break;
       }
       
-      
-      
-      
-      
+      //  Update variables  //
       totalGallons += gallons;
       totalMiles   += miles;
       trip         += 1;
       
+      //  Output Trip MPG  //
       if (miles > 0 && gallons > 0)
       {
          printf("The MPG for this trip was %.1f\n", miles / gallons);
@@ -101,6 +126,7 @@ int main(void)
 
    }
    
+   //  Before Program Exit, Output total MPG  //
    if (totalMiles > 0 && totalGallons > 0)
    {
       puts("");
