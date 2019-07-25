@@ -19,7 +19,7 @@
  
  
    // Processing Phase //
-   While gallons is greater than -1
+   While gallons is greater than 0
          Input gallons
          Add gallons to totalGallons
  
@@ -35,28 +35,77 @@
    Print totalMiles divided by totalGallons
  */
 
+#include <stdio.h>
+#include <stdlib.h>
+
 int main(void)
 {
+   float miles         = 1;
+   float totalMiles    = 0;
+   
    float gallons       = 0;
    float totalGallons  = 0;
    
-   float miles         = 0;
-   float totalMiles    = 0;
+   int trip = 1;
    
-   while (gallons >= 0)
+   
+   //  Clear Screen  //
+   system("clear");
+   
+   //  Begin Program  //
+   puts("Welcome to the MPG Calculator!");
+   while (miles > 0)
    {
-      printf("%s", "How many gallons did your vehicle use?  ");
-      scanf("%d", &gallons);
+      if (trip > 1)
+      {
+         printf("Tell us about your next trip:\n");
+      }
+      else if (trip <= 1)
+      {
+         printf("Tell us about your first trip:\n");
+         puts("");
+      }
       
       printf("%s", "How many miles did you drive?  ");
-      scanf("%d", &miles);
+      scanf("%f", &miles);
+      if (miles <= 0)
+      {
+         //puts("");
+         puts("Looks like you stayed home.");
+         break;
+      }
+      
+      printf("%s", "How many gallons of gas were used?  ");
+      scanf("%f", &gallons);
+      if (gallons <= 0 && miles >= 0)
+      {
+         puts("");
+         printf("You drove %.1f miles on %.0f gallons of gas?\n", miles, gallons);
+         puts("The fuel efficiency of your vehicle is amazing!!");
+         break;
+      }
+      
+      
+      
+      
       
       totalGallons += gallons;
       totalMiles   += miles;
+      trip         += 1;
       
-      printf("The miles-per-gallon for this trip was %.2f\n", gallons / miles);
+      if (miles > 0 && gallons > 0)
+      {
+         printf("The MPG for this trip was %.1f\n", miles / gallons);
+         puts("");
+      }
+
    }
    
-   
+   if (totalMiles > 0 && totalGallons > 0)
+   {
+      puts("");
+      printf("The overall MPG for your vehicle is %.1f\n", totalMiles / totalGallons);
+   }
+
    return 0;
 }
