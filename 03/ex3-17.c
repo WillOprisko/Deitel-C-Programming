@@ -81,6 +81,8 @@
                int remainingCredit;
  
       Class Methods - 'generalLedger'
+            'Ledger__init'
+            'Ledger__constructor' 
             'createAccount'
             'deleteAccount'
             'exit'
@@ -151,41 +153,6 @@
 #include <stdlib.h>
 #include "ex3-17.h"
 
-/*
-//  'ledgerAccount'  //
-typedef struct
-{
-   int accountNumber;
-   int balance;
-   int creditLimit;
-   int remainingCredit;
-} ledgerAccount;
-
-
-//  'generalLedger'  //
-typedef struct
-{
-   struct ledgerAccount * creditCard;
-   int numberOfAccounts;
-} generalLedger;
-
-
-//  Initialize 'generalLedger'  //
-void Ledger__init(struct generalLedger* self)
-{
-   self->numberOfAccounts = 0;
-}
-
-
-//  Construct 'generalLedger'  //
-struct generalLedger * Ledger__constructor (void)
-{
-   struct generalLedger * newLedger = (struct generalLedger*) malloc(sizeof(struct generalLedger));
-      Ledger__init(newLedger);
-                                                       
-   return newLedger;
-}
-*/
 
 int main(void)
 {
