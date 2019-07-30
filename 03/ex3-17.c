@@ -149,30 +149,35 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include "ex3-17.h"
 
-
-struct ledgerAccount
+/*
+//  'ledgerAccount'  //
+typedef struct
 {
    int accountNumber;
    int balance;
    int creditLimit;
    int remainingCredit;
-};
+} ledgerAccount;
 
 
-struct generalLedger
+//  'generalLedger'  //
+typedef struct
 {
    struct ledgerAccount * creditCard;
    int numberOfAccounts;
-};
+} generalLedger;
 
 
+//  Initialize 'generalLedger'  //
 void Ledger__init(struct generalLedger* self)
 {
    self->numberOfAccounts = 0;
 }
 
 
+//  Construct 'generalLedger'  //
 struct generalLedger * Ledger__constructor (void)
 {
    struct generalLedger * newLedger = (struct generalLedger*) malloc(sizeof(struct generalLedger));
@@ -180,11 +185,12 @@ struct generalLedger * Ledger__constructor (void)
                                                        
    return newLedger;
 }
-
+*/
 
 int main(void)
 {
-   struct generalLedger * Ledger = Ledger__constructor();
+   generalLedger * Ledger = Ledger__constructor();
+   Ledger->numberOfAccounts = 12;
    
    printf("%d\n", Ledger->numberOfAccounts);
    
