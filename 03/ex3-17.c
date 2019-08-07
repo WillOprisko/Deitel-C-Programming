@@ -119,7 +119,23 @@
 
 int main(void)
 {
+   generalLedger Master;
+   __constructor__generalLedger(&Master);
 
+   
+   
+
+   
+   
    
    return 0;
 }
+
+
+/*    TEST CODE   //
+ printf("%d\n", Master.numberOfAccounts);
+ printf("%d\n", Master.creditCards[0].accountNumber);
+ 
+ Master.creditCards[0].accountNumber = 1001;
+ printf("%d\n", Master.creditCards[0].accountNumber);
+ //    END TEST    */
