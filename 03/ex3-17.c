@@ -15,7 +15,7 @@
                ::  Program Outline  ::
  -------------------------------------------------------------------------------
    I.    Display a "Menu" with the following options:
-         A. Create a new credit card account (Limit 10)
+         A. Create a new credit card account
          B. Enter  a new charge or payment on an existing account
          C. Check  the balance on all your accounts
          D. Exit
@@ -82,7 +82,7 @@
  
       Class Methods - 'generalLedger'
             'Ledger__init'
-            'Ledger__constructor' 
+            'Ledger__constructor'
             'createAccount'
             'deleteAccount'
             'exit'
@@ -98,44 +98,7 @@
             void createAccount (struct generalLedger.(ledgerAccount *));
             void deleteAccount (struct generalLedger.(ledgerAccount *));
             void exit (struct ledgerAccount *);
- 
- 
-      Class Method Definition - 'Ledger__constructor'
-            generalLedger * Ledger__constructor (void)
-            {
-               generalLedger * newLedger = (generalLedger*) malloc(sizeof(generalLedger);
-               Ledger__init(newLedger);
- 
-               return newLedger;
-            }
- 
- 
-      Class Method Definition - 'Ledger__init'
-            void Ledger__init(generalLedger* self)
-            {
-               self->numberOfAccounts = 0;
-            }
- 
- 
-      Class Method Definition - 'createAccount'
-            void createAccount (struct generalLedger.(ledgerAccount *))
-            {
- 
-            }
- 
- 
-      Class Method Definition - 'deleteAccount'
-            void deleteAccount (struct generalLedger.(ledgerAccount *))
-            {
- 
-            }
- 
- 
-      Class Method Definition - 'exit'
-            void exit (struct ledgerAccount *)
-            {
- 
-            }
+
  
  //  Intialization Phase  //
  
@@ -156,10 +119,7 @@
 
 int main(void)
 {
-   generalLedger * Ledger = Ledger__constructor();
-   Ledger->numberOfAccounts = 12;
-   
-   printf("%d\n", Ledger->numberOfAccounts);
+
    
    return 0;
 }

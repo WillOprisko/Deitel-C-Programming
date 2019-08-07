@@ -17,16 +17,17 @@ typedef struct
 
 
 //  Initialize 'generalLedger'  //
-void Ledger__init(generalLedger* self)
+void Ledger__init(generalLedger * self)
 {
-   self->numberOfAccounts = 0;
+   self->creditCards = (ledgerAccount *) malloc(10 * sizeof(ledgerAccount *));
+   self->numberOfAccounts = 0; // what about:  self.numberOfAccounts
 }
 
 
 //  Construct 'generalLedger'  //
 generalLedger * Ledger__constructor(void)
 {
-   generalLedger * newLedger = (generalLedger*) malloc(sizeof(generalLedger));
+   generalLedger * newLedger = (generalLedger*) malloc(sizeof(generalLedger*));
    Ledger__init(newLedger);
    
    return newLedger;
@@ -36,17 +37,6 @@ generalLedger * Ledger__constructor(void)
 //  Construct 'generalLedger'  //
 void createAccount (generalLedger * self)
 {
-   
-   unsigned long * temp = 0;
-   temp = realloc(self->creditCards, sizeof(*(self->creditCards)) * 1);
-   //self->creditCards = realloc(self->creditCards, sizeof(*(self->creditCards)) * 1);
-   
-   
-   if (temp)
-   {
-      self->creditCards = temp;
-      self->numberOfAccount += 1;
-   }
    
 }
 
