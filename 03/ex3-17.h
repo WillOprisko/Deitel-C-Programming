@@ -1,3 +1,5 @@
+#define INITIAL_ACCOUNTS   10
+
 //  'ledgerAccount'  //
 typedef struct
 {
@@ -17,13 +19,12 @@ typedef struct
 
 
 
-//  Initialize 'generalLedger'  //
+//  Initialize Class variables and array elements to '0'     //
 void __init__generalLedger(generalLedger * self)
 {
-   // Can use the '.' separator because the index value 'n' specifies the
-   // array element within the self->'ledgerAccount * creditCards'
-   // that is being used.
-   for (unsigned int n = 0; n < 10; n++)
+   // Can use the '.' separator because the index value 'n' specifies which
+   // array element within the self->'ledgerAccount * creditCards' to use
+   for (unsigned int n = 0; n < INITIAL_ACCOUNTS; n++)
    {
       self->creditCards[n].accountNumber   = 0;
       self->creditCards[n].balance         = 0;
@@ -36,12 +37,12 @@ void __init__generalLedger(generalLedger * self)
 
 
 
-//  Construct 'generalLedger'  //
+//  Allocate memory in the heap to create a dynamic 'ledgerAccount *' array  //
 void __constructor__generalLedger(generalLedger * self)
 {
    // Cannot use '.' separator because this method is acting upon a pointer
-   // Allocating memory in the heap to create a dynamic array
-   self->creditCards = (ledgerAccount *) malloc(10 * sizeof(ledgerAccount *));
+   //  ERROR :: see menu()  //
+   self->creditCards = (ledgerAccount *) malloc(15 * sizeof(ledgerAccount *));
    __init__generalLedger(self);
 }
 

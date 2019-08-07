@@ -1,7 +1,7 @@
 /*************************************************
  * Deitel - C Programming
  * Chapter 3 -- Exercise 3.17
- * "Gas Mileage"
+ * "Credit Card Account"
  *************************************************/
 
 /*
@@ -93,11 +93,11 @@
             'checkBalance'
  
       Class Method Declarations - 'generalLedger'
-            generalLedger * Ledger__constructor (void);
-            void Ledger__init(generalLedger* self);
-            void createAccount (struct generalLedger.(ledgerAccount *));
-            void deleteAccount (struct generalLedger.(ledgerAccount *));
-            void exit (struct ledgerAccount *);
+            void __constructor__generalLedger   (generalLedger *self);
+            void __init__generalLedger          (generalLedger *self);
+            void createAccount                  (generalLedger *self);
+            void deleteAccount                  (generalLedger *self);
+            void exit                           (generalLedger *self);
 
  
  //  Intialization Phase  //
@@ -115,20 +115,93 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ex3-17.h"
+/*
+#define IN        1
+#define OUT       0
+#define DEFAULT   0
+*/
 
 
+void menu(int state);
+
+ 
 int main(void)
 {
+  
+   
    generalLedger Master;
    __constructor__generalLedger(&Master);
 
-   
-   
+
+
+   int state  = 0;
+   int choice = 0;
+   do
+   {
+      menu(state);
+      switch(choice)
+      {
+         case 1 :
+            state = 1;
+            break;
+         case 2 :
+            break;
+         case 3 :
+            break;
+         case 4 :
+            break;
+         default:
+            puts("");
+            puts("It appears you would like to exit the program.");
+            puts("Have a great day!");
+            state = 0;
+         
+      };
+   } while (state == 1);
+
 
    
    
    
    return 0;
+}
+
+/*    Incorrect checksum for freed object 0x7fa7b5402a28: probably modified
+      after being freed.
+ 
+      Corrupt value: 0x0
+ 
+      ex3-17(4092,0x1113265c0) malloc: *** set a breakpoint in
+      malloc_error_break to debug
+ 
+      Abort trap: 6
+ 
+      //  Appears to be an instance of writing beyond the allocated memory  //
+      //    Fixed when allocating more memory to self->creditCards
+      //    (see void __constructor__generalLedger)
+*/
+void menu(int state)
+{
+   int choice = 0;
+   
+   system("clear");
+   if (state == 1)
+   {
+      puts("Please make another selection:");
+   }
+   else if (state == 0)
+   {
+      puts("Welcome to the Credit Card Account generator!");
+      puts("Please select one of the following options:");
+   }
+   
+   puts("1) Create a New Account");
+   puts("2) Enter a Transaction");
+   puts("3) Check Account Balance");
+   puts("4) Delete an Existing Account");
+   puts("5) Exit Program");
+   
+   //return choice;
 }
 
 
