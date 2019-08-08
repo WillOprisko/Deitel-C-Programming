@@ -1,4 +1,5 @@
 #define INITIAL_ACCOUNTS   5
+#define MEMORY_BUFFER      0
 
 //  'ledgerAccount'  //
 typedef struct
@@ -41,17 +42,55 @@ void __init__generalLedger(generalLedger * self)
 void __constructor__generalLedger(generalLedger * self)
 {
    // Cannot use '.' separator because this method is acting upon a pointer
-   //  ERROR :: see menu()  //
-   self->creditCards = (ledgerAccount *) malloc((INITIAL_ACCOUNTS + 0) * sizeof(ledgerAccount *));
+   self->creditCards = (ledgerAccount *) malloc((INITIAL_ACCOUNTS + MEMORY_BUFFER) * sizeof(ledgerAccount *));
    __init__generalLedger(self);
 }
 
+
+int validateAccount(generalLedger * self, int accountNumber)
+{
+   
+   return 0;
+}
 
 
 //  Construct 'generalLedger'  //
 void createAccount (generalLedger * self)
 {
+   int  accountNumber;
+   int  index = self->numberOfAccounts;
    
+   
+   //    //
+   if (self->numberOfAccounts > 1)
+   {
+      printf("You have %d accounts on file.\n", self->numberOfAccounts);
+      printf("Enter another account number:  ");
+   }
+   else if (self->numberOfAccounts == 1)
+   {
+      puts("You onyl have one account on file");
+      printf("Enter a second account number:  ");
+      
+   }
+   else if (self->numberOfAccounts <= 0)
+   {
+      puts("You have no accounts on file");
+      printf("Enter a new account number:  ");
+   }
+   
+   
+   //    //
+   if (scanf("%d", &accountNumber) == 1)
+   {
+      self->creditCards[index].accountNumber = validateAccount(self, accountNumber);
+   }
+   else
+   {
+      fflush(stdin);
+      puts("You did not enter a valid account number.");
+      puts("Returning the the main menu");
+   }
 }
 
 
