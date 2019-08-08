@@ -1,4 +1,4 @@
-#define INITIAL_ACCOUNTS   10
+#define INITIAL_ACCOUNTS   5
 
 //  'ledgerAccount'  //
 typedef struct
@@ -42,7 +42,7 @@ void __constructor__generalLedger(generalLedger * self)
 {
    // Cannot use '.' separator because this method is acting upon a pointer
    //  ERROR :: see menu()  //
-   self->creditCards = (ledgerAccount *) malloc(15 * sizeof(ledgerAccount *));
+   self->creditCards = (ledgerAccount *) malloc((INITIAL_ACCOUNTS + 0) * sizeof(ledgerAccount *));
    __init__generalLedger(self);
 }
 

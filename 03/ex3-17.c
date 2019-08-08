@@ -122,27 +122,37 @@
 */
 
 
-void menu(int state);
+int menu(int);
 
  
 int main(void)
 {
-  
+   // int state  = 0;
+   int choice = 0;
    
+   
+   // Initiating a system call "clear" immediately after
+   // __constructor__generalLedger within main() or menu()
+   // results in an fatal-error::
+   // malloc: Incorrect checksum for freed object . . . Corrupt value: 0x0
+   
+   // This error can be avoided by allocating 5 additional block of memory
+   // to self->creditCards
+   
+   // The exact cause and/or reason for the error is uncertain but it appears to
+   // be connected with how the program is using and freeing memory in the heap
+   
+   system("clear");
    generalLedger Master;
    __constructor__generalLedger(&Master);
 
-
-
-   int state  = 0;
-   int choice = 0;
    do
    {
-      menu(state);
+      choice = menu(choice);
       switch(choice)
       {
+         system("clear");
          case 1 :
-            state = 1;
             break;
          case 2 :
             break;
@@ -154,10 +164,8 @@ int main(void)
             puts("");
             puts("It appears you would like to exit the program.");
             puts("Have a great day!");
-            state = 0;
-         
       };
-   } while (state == 1);
+   } while (choice >= 0 && choice < 5);
 
 
    
@@ -166,30 +174,15 @@ int main(void)
    return 0;
 }
 
-/*    Incorrect checksum for freed object 0x7fa7b5402a28: probably modified
-      after being freed.
- 
-      Corrupt value: 0x0
- 
-      ex3-17(4092,0x1113265c0) malloc: *** set a breakpoint in
-      malloc_error_break to debug
- 
-      Abort trap: 6
- 
-      //  Appears to be an instance of writing beyond the allocated memory  //
-      //    Fixed when allocating more memory to self->creditCards
-      //    (see void __constructor__generalLedger)
-*/
-void menu(int state)
+//  //
+int menu(int choice)
 {
-   int choice = 0;
-   
-   system("clear");
-   if (state == 1)
+   if (choice > 0)
    {
+      system("clear");
       puts("Please make another selection:");
    }
-   else if (state == 0)
+   else if (choice <= 0)
    {
       puts("Welcome to the Credit Card Account generator!");
       puts("Please select one of the following options:");
@@ -201,7 +194,10 @@ void menu(int state)
    puts("4) Delete an Existing Account");
    puts("5) Exit Program");
    
-   //return choice;
+   printf("%s", ">  ");
+   scanf("%d", &choice);
+   
+   return choice;
 }
 
 
