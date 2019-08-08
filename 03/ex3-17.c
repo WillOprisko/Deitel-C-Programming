@@ -115,15 +115,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ex3-17.h"
-/*
-#define IN        1
-#define OUT       0
-#define DEFAULT   0
-*/
-
 
 int menu(int);
-
  
 int main(void)
 {
@@ -165,14 +158,11 @@ int main(void)
             puts("It appears you would like to exit the program.");
             puts("Have a great day!");
       };
-   } while (choice >= 0 && choice < 5);
-
-
-   
-   
+   } while (choice >= 1 && choice <= 4);
    
    return 0;
 }
+
 
 //  //
 int menu(int choice)
