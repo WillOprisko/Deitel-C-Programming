@@ -47,10 +47,40 @@ void __constructor__generalLedger(generalLedger * self)
 }
 
 
-int validateAccount(generalLedger * self, int accountNumber)
+int validateTransaction(generalLedger * self)
 {
+   float userInput;
    
-   return 0;
+   //    //
+   if (scanf("%f", &userInput) != 1)
+   {
+      //    CLEAR STANDARD INPUT BUFFER   //
+      while (fgetc(stdin) != '\n');
+      return 0;
+   }
+   else
+   {
+      return userInput;
+   }
+}
+
+
+
+int validateAccount(generalLedger * self)
+{
+   int userInput;
+   
+   //    //
+   if (scanf("%d", &userInput) != 1)
+   {
+      //    CLEAR STANDARD INPUT BUFFER   //
+      while (fgetc(stdin) != '\n');
+      return 0;
+   }
+   else
+   {
+      return userInput;
+   }
 }
 
 
@@ -59,7 +89,6 @@ void createAccount (generalLedger * self)
 {
    int  accountNumber;
    int  index = self->numberOfAccounts;
-   
    
    //    //
    if (self->numberOfAccounts > 1)
@@ -79,15 +108,14 @@ void createAccount (generalLedger * self)
       printf("Enter a new account number:  ");
    }
    
-   
-   //    //
-   if (scanf("%d", &accountNumber) == 1)
+   accountNumber = validateAccount(self);
+   if (accountNumber > 0)
    {
-      self->creditCards[index].accountNumber = validateAccount(self, accountNumber);
+      self->creditCards[index].accountNumber = accountNumber;
+      self->numberOfAccounts++;
    }
    else
    {
-      fflush(stdin);
       puts("You did not enter a valid account number.");
       puts("Returning the the main menu");
    }
