@@ -141,9 +141,16 @@ int main(void)
 
    do
    {
+      // Program must check and validate the user input in order to prevent
+      // an infinite-loop from occuring
       choice = menu(choice);
+      
+      // Clear the stdin buffer to prevent invalid input from impacting
+      // program behavior
+      while (fgetc(stdin) != '\n');
       switch(choice)
       {
+         //    Clear Console Screen and stdin Buffer  //
          system("clear");
          case 1 :
             createAccount(&Master);
@@ -174,6 +181,7 @@ int menu(int choice)
    if (choice > 0)
    {
       system("clear");
+      //printf("\033[H\033[J");
       puts("Please make another selection:");
    }
    else if (choice <= 0)
@@ -189,9 +197,13 @@ int menu(int choice)
    puts("5) Exit Program");
    
    printf("%s", ">  ");
-   scanf("%d", &choice);
    
-   return choice;
+   
+   // Validates User Input   //
+   if (scanf("%d", &choice) != 1)
+      return 0;
+   else
+      return choice;
 }
 
 

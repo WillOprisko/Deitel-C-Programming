@@ -47,6 +47,26 @@ void __constructor__generalLedger(generalLedger * self)
 }
 
 
+void pauseProgram(void)
+{
+   char ch;
+   printf("Press [ENTER] to return to the main menu . . .  ");
+   
+   // Turn-Off Echo to prevent the screen from display typed text //
+   system("stty -echo");
+   
+   // Create a delay for the user the read the screen //
+   scanf("%c%*c",&ch);
+   // Clear the stdin buffer to prevent undefinied program behavior  //
+   while (fgetc(stdin) != '\n');
+   
+   // Turn-On Echo to allow typed text to be displayed on the screen //
+   system("stty echo");
+   
+}
+
+
+//    //
 int validateTransaction(generalLedger * self)
 {
    float userInput;
@@ -54,8 +74,7 @@ int validateTransaction(generalLedger * self)
    //    //
    if (scanf("%f", &userInput) != 1)
    {
-      //    CLEAR STANDARD INPUT BUFFER   //
-      while (fgetc(stdin) != '\n');
+      pauseProgram();
       return 0;
    }
    else
@@ -66,6 +85,25 @@ int validateTransaction(generalLedger * self)
 
 
 
+//    //
+int checkAccount(generalLedger * self, int newAccount)
+{
+   for (int n = 0; n < self->numberOfAccounts; n++)
+   {
+      if (self->creditCards[n].accountNumber == newAccount)
+      {
+         printf("Account %d is already on file.\n", newAccount);
+         pauseProgram();
+         return 0;
+      }
+   }
+   
+   return newAccount;
+}
+
+
+
+//    //
 int validateAccount(generalLedger * self)
 {
    int userInput;
@@ -75,16 +113,20 @@ int validateAccount(generalLedger * self)
    {
       //    CLEAR STANDARD INPUT BUFFER   //
       while (fgetc(stdin) != '\n');
+      puts("You did not enter a valid account number.");
+      pauseProgram();
       return 0;
    }
    else
    {
+      userInput = checkAccount(self, userInput);
       return userInput;
    }
 }
 
 
-//  Construct 'generalLedger'  //
+
+//    //
 void createAccount (generalLedger * self)
 {
    int  accountNumber;
@@ -98,9 +140,8 @@ void createAccount (generalLedger * self)
    }
    else if (self->numberOfAccounts == 1)
    {
-      puts("You onyl have one account on file");
+      puts("You only have one account on file");
       printf("Enter a second account number:  ");
-      
    }
    else if (self->numberOfAccounts <= 0)
    {
@@ -108,18 +149,16 @@ void createAccount (generalLedger * self)
       printf("Enter a new account number:  ");
    }
    
+   
+   
    accountNumber = validateAccount(self);
    if (accountNumber > 0)
    {
       self->creditCards[index].accountNumber = accountNumber;
       self->numberOfAccounts++;
    }
-   else
-   {
-      puts("You did not enter a valid account number.");
-      puts("Returning the the main menu");
-   }
 }
+
 
 
 //  Construct 'generalLedger'  //
@@ -127,6 +166,7 @@ void deleteAccount (generalLedger * self)
 {
    
 }
+
 
 
 //  Construct 'generalLedger'  //
