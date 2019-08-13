@@ -151,7 +151,8 @@ int main(void)
       switch(choice)
       {
          //    Clear Console Screen and stdin Buffer  //
-         system("clear");
+         //system("clear");
+         printf("\n\n\n");
          case 1 :
             createAccount(&Master);
             break;
@@ -180,8 +181,9 @@ int menu(int choice)
 {
    if (choice > 0)
    {
-      system("clear");
+      // Clears the Screen //
       //printf("\033[H\033[J");
+      printf("\n\n\n");
       puts("Please make another selection:");
    }
    else if (choice <= 0)
