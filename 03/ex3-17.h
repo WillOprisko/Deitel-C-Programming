@@ -165,9 +165,9 @@ void displayAccountInformation(generalLedger * self)
    else
    {
       printf("Bank Record for Account #%d\n", self->creditCards[index].accountNumber);
-      printf("Balance:           %.2f\n", self->creditCards[index].balance);
-      printf("Credit Limit:      %d\n", self->creditCards[index].creditLimit);
-      printf("Remaining Credit:  %.2f\n", self->creditCards[index].remainingCredit);
+      printf("Balance:           $%.2f\n", self->creditCards[index].balance);
+      printf("Credit Limit:      $%d\n", self->creditCards[index].creditLimit);
+      printf("Remaining Credit:  $%.2f\n", self->creditCards[index].remainingCredit);
    }
 }
 
@@ -196,6 +196,12 @@ void enterTransaction (generalLedger * self)
                 self->creditCards[index].balance );
          
          self->creditCards[index].remainingCredit = self->creditCards[index].creditLimit - self->creditCards[index].balance;
+      }
+      
+      if (self->creditCards[index].remainingCredit < 0)
+      {
+         puts("");
+         puts("::Warning:: Credit Limit Exceeded.");
       }
    }
 }
