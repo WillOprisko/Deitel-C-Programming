@@ -156,13 +156,13 @@ int main(void)
             createAccount(&Master);
             break;
          case 2 :
-            // enterTransaction();
+            enterTransaction(&Master);
             break;
          case 3 :
-            // checkAccountBalance();
+            displayAccountInformation(&Master);
             break;
          case 4 :
-            // deleteAccount(&Master);
+            deleteAccount(&Master);
             break;
          default:
             puts("");
