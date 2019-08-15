@@ -19,7 +19,7 @@ int main(void)
    int userInput;
    
    puts("Palindrome Number Tester");
-   puts("Enter a five digit integer: ");
+   printf("Enter a 5-digit integer:  ");
    
    if (scanf("%d", &userInput) != 1)
    {
@@ -27,18 +27,23 @@ int main(void)
       puts("");
       puts("You did not enter a valid integer.");
    }
-   else if ((userInput / 10000) >= 1 && (userInput / 10000) <= 9)
+   else if ( userInput >= 10000 && userInput <= 99999)
    {
       if (((userInput / 1000) % 10) == ((userInput % 100) / 10) &&
           ((userInput / 1000) / 10) == ((userInput % 100) % 10))
           {
              printf("The number %d IS a palindrome.\n", userInput);
           }
+      else
+      {
+         printf("The number %d is NOT a palindrome.\n", userInput);
+      }
    }
    else
    {
-      printf("The number %d is NOT a palindrome.\n", userInput);
+      puts("The number is not a 5-digit integer.");
    }
+   
    
    
    return 0;
