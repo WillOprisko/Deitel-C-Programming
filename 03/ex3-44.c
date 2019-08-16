@@ -1,7 +1,7 @@
 /*************************************************
  * Deitel - C Programming
- * Chapter 3 -- Exercise 3.43
- * "Sides of a Triangle"
+ * Chapter 3 -- Exercise 3.44
+ * "Sides of a Right-Triangle"
  *************************************************/
 
 /*
@@ -9,7 +9,7 @@
  ::  Program Description  ::
  ----------------------------------------------------------------------
  Write a program that reads three nonzero integer values and determines
- and prints whether they could represent the sides of a triangle.
+ and prints whether they could represent the sides of a right-triangle.
  */
 
 #include <stdio.h>
