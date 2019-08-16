@@ -17,21 +17,21 @@
 
 int main(void)
 {
-   int a = 0;
-   int b = 0;
-   int c = 0;
+   float a = 0;
+   float b = 0;
+   float c = 0;
    
    puts("Welcome to the Right-Triangle Verification Program!");
    puts("Please enter three non-negative integers.");
    
    printf("Number 1:  ");
-   scanf("%d", &a);
+   scanf("%f", &a);
    
    printf("Number 2:  ");
-   scanf("%d", &b);
+   scanf("%f", &b);
    
    printf("Number 3:  ");
-   scanf("%d", &c);
+   scanf("%f", &c);
    
    while(fgetc(stdin) != '\n');
    
@@ -41,7 +41,7 @@ int main(void)
           sqrt((b*b)+(c*c)) == a ||
           sqrt((c*c)+(a*a)) == b)
       {
-         printf("\nThe integers %d, %d, and %d are valid sides of a right triangle\n", a, b, c);
+         printf("\nThe integers %.1f, %.1f, and %.1f are valid sides of a right triangle\n", a, b, c);
       }
       else
       {
