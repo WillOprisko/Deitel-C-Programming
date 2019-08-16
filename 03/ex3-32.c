@@ -12,6 +12,8 @@
  out of asterisks. Your program should work for squares of all side sizes between
  1 and 20.
  */
+
+
 #include <stdio.h>
 
 
