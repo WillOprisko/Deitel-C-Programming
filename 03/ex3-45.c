@@ -28,9 +28,9 @@
 int main(void)
 {
    unsigned long long int factorial = 1;
-   unsigned long long int userInput;
+   long long int userInput;
    
-   if(scanf("%llu", &userInput) == 1)
+   if(scanf("%lld", &userInput) == 1 && userInput > 0)
    {
       for (int n = 0; n < userInput; n++)
       {
