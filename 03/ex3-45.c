@@ -22,3 +22,30 @@
  
       c) Write a program that computes the value of (e)x by using the formula
  */
+
+#include <stdio.h>
+
+int main(void)
+{
+   unsigned long long int factorial = 1;
+   unsigned long long int userInput;
+   
+   if(scanf("%llu", &userInput) == 1)
+   {
+      for (int n = 0; n < userInput; n++)
+      {
+         factorial *= userInput - n;
+      }
+      
+      if (factorial > 0)
+      {
+         printf("%llu\n", factorial);
+      }
+   }
+   else
+   {
+      while(fgetc(stdin) != '\n');
+   }
+   
+   return 0;
+}
