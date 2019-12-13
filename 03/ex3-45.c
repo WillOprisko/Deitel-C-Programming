@@ -25,27 +25,56 @@
 
 #include <stdio.h>
 
+unsigned long long factorialGenerator (int n);
+long double eConstantGenerator (int n, int x);
+//long double eXDerivativeGenerator (int n);
+
 int main(void)
 {
-   unsigned long long int factorial = 1;
-   long long int userInput;
+   int userInput = 0;
+   unsigned long long factorial = 1;
+   long double eConstant = 1;
    
-   if(scanf("%lld", &userInput) == 1 && userInput > 0)
-   {
-      for (int n = 0; n < userInput; n++)
-      {
-         factorial *= userInput - n;
-      }
-      
-      if (factorial > 0)
-      {
-         printf("%llu\n", factorial);
-      }
-   }
-   else
-   {
-      while(fgetc(stdin) != '\n');
-   }
+   puts  ("Welcome to the Factorial Generator!");
+   puts  ("Provide an integer between 0-65.");
+   printf("Number: ");
+   scanf ("%d", &userInput);
+   
+   factorial = factorialGenerator(userInput);
+   eConstant = eConstantGenerator(userInput, 1);
+   
+   printf("%d!: %llu\n", userInput, factorial);
+   printf("e:  %Lf\n", eConstant);
    
    return 0;
+}
+
+
+unsigned long long factorialGenerator (int n)
+{
+   unsigned long long factorial = 1;
+   while (n > 0)
+   {
+      factorial *= n;
+      n--;
+   }
+   
+   return factorial;
+}
+
+
+long double eConstantGenerator (int n, int x)
+{
+   unsigned long long factorial = 1;
+   long double eConstant = 1;
+   for (int i=1; i <= n; i++)
+   {
+      factorial = factorialGenerator(i);
+      //printf("%llu\n", factorial);
+      
+      eConstant += (long double) x / factorial;
+      //printf("%Lf\n", eConstant);
+   }
+   
+   return eConstant;
 }
